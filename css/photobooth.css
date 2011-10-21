@@ -1,6 +1,6 @@
 body{
 	background: lightgrey;
-}
+}.row div{    width: 150px;}
 #downloads{
 	border: 1px solid;
 	width: 200px;

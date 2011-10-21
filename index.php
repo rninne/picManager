@@ -9,18 +9,60 @@
 
 ?>
 
-
 <html>
 <head>
 </head>
 <body>
 <h3>Choose an album</h3>
-<a href="album.php?folder=maleny_manor">Maleny Manor Staff</a>
-<br />
-<a href="album.php?folder=criddle">Criddle Photos</a>
-<br />
-<a href="album.php?folder=best_of">Best of collections</a>
-<br />
-<a href="album.php?folder=photobooth">Photobooth</a>
+
+<?php
+$dir = './images/';
+$folders = scandir($dir);
+array_shift($folders);
+array_shift($folders);
+
+$i=0;
+foreach($folders as $index => $item){
+    if(is_dir($dir.$item)){
+        echo '<a href="album.php?folder='.$item.'">'.$item.'</a><br />';
+    }else{
+        array_splice($folders, $index-$i, 1);
+        $i++;
+    }
+}
+print_r($folders);
+?>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
