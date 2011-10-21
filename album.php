@@ -26,27 +26,14 @@
         function toggleImage(checkBox, id){
             var checked = $(checkBox).checked;
             if(checked){
-                if($(checkBox).hasClassName('CBL')){
-                    $('CB_'+id).checked = 'checked';
-                }
+                $('CB_'+id).checked = 'checked';
                 $('downloads').insert('<div id="DL_'+ id +'" class="choice"><img src="<?php echo $dir ?>thumbs/small/'+ id +'.JPG" onmouseup="removeImage(\''+ id +'\')" /><br />'+id+'</div>');
                 $('A_'+id).title = '<input id="CBL_'+ id +'" class="CBL" type="checkbox" checked="checked" onchange="toggleImage(this,\''+ id +'\')" /> Add to downloads';
-                imagePosition[id] = imageList.length;
                 imageList.push(id);
             } else {
-                if($(checkBox).hasClassName('CBL')){
-                    $('CB_'+id).checked = '';
-                }
-                $('DL_'+id).remove();
-                $('A_'+id).title = '<input id="CBL_'+ id +'" class="CBL" type="checkbox" onchange="toggleImage(this,\''+ id +'\')" /> Add to downloads';
-                
-                imageList.splice(imagePosition[id], 1);
-                imagePosition[id] = false;
+                removeImage(id);
             }
 
-            for(i=0;i<imageList.length;i++){
-                imagePosition[imageList[i]] = i;
-            }
             $('DLZIP').href = 'zipDownload.php?folder=<?php echo $folder ?>&files=' + imageList.toString();
         }
         
@@ -55,8 +42,13 @@
             $('CB_'+id).checked = '';
             $('A_'+id).title = '<input id="CBL_'+ id +'" class="CBL" type="checkbox" onchange="toggleImage(this,\''+ id +'\')" /> Add to downloads';
 
-            imageList.splice(imagePosition[id], 1);
-            imagePosition[id] = false;
+            for(i=0;i<imageList.length;i++){
+                if(imageList[i] == id) {
+                    imageList.splice(i, 1);
+                    break;
+                }
+            }
+            $('DLZIP').href = 'zipDownload.php?folder=<?php echo $folder ?>&files=' + imageList.toString();
         }
         
         function checkPosition(id){
