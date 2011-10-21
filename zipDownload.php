@@ -4,7 +4,7 @@ $folder = $_GET['folder'];
 $files = preg_split('/,/', $_GET['files']);
 
 // Temporary name for the zip file
-$zipname = tempnam('./zips', 'images_').'.zip';
+$zipname = tempnam('./', 'images_').'.zip';
 // Create zip file containing requested contents
 $zip = new ZipArchive();
 if ($zip->open($zipname, ZIPARCHIVE::CREATE) !== TRUE ) {

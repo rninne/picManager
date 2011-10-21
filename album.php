@@ -47,6 +47,7 @@
             for(i=0;i<imageList.length;i++){
                 imagePosition[imageList[i]] = i;
             }
+            $('DLZIP').href = 'zipDownload.php?folder=<?php echo $folder ?>&files=' + imageList.toString();
         }
         
         function removeImage(id){
@@ -170,7 +171,7 @@ EOS;
             </div>
         </div>
         <div id="downloads">
-            <a href="javascript:makeZipLink()">Download .zip</a>
+            <a id="DLZIP" href="#">Download .zip</a>
         </div>
     </body>
 </html>
