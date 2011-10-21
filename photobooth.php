@@ -1,8 +1,8 @@
 <?php
 /*** Set page defaults based on selection at choice of album page*/
-    $folder = $_GET['folder']
+    //$folder = $_GET['folder']
     //$username = $SESSION[''];
-    //$userFolder = './users/'. $username;
+    //$userFolder = './users/'. $username;		$dir = './images/photobooth/';
 
 ?>
 
@@ -82,7 +82,7 @@ include('SimpleImage.php');
 /*** Scan directory for images
 
 */
-$files = scandir('photobooth');
+$files = scandir($dir);
 
 /*** Scan for thumbnails
 if thumbnail not found in /thumbs directory, create a new one.
@@ -113,8 +113,8 @@ foreach($files as $file){
 /*** remove all non image files from the array
 */
 $i=0;
-foreach($files as $index => $file){
-    if(is_dir('./photobooth/'.$file)){
+foreach($files as $index => $file){	//echo $dir.$file;
+    if(is_dir($dir.$file)){
         array_splice($files, $index-$i, 1);
         $i++;
     }
@@ -131,7 +131,7 @@ $i=0;
 foreach($files as $file){
     
     $i ++;
-        
+        	
     list($id, $extension) = preg_split('/\./', $file);
     if ($i%3 == 1) {
 		//left
@@ -143,8 +143,8 @@ foreach($files as $file){
 		//middle
 		echo '<div class="middle">';
 	}
-    echo '<a id="A_'.$id.'" href="photobooth/thumbs/large/'.$file.'" rel="lightbox[photobooth]" title="&lt;input type=&quot;checkbox&quot; id=&quot;CBL_'.$id.'&quot; onchange=&quot;selectImage(\''.$id.'\',true)&quot; /&gt; Add to downloads">';
-    echo '<img src="photobooth/thumbs/small/'.$file.'" id="'.$id.'" />';
+    echo '<a id="A_'.$id.'" href="'.$dir.'thumbs/large/'.$file.'" rel="lightbox[photobooth]" title="&lt;input type=&quot;checkbox&quot; id=&quot;CBL_'.$id.'&quot; onchange=&quot;selectImage(\''.$id.'\',true)&quot; /&gt; Add to downloads">';
+    echo '<img src="'.$dir.'thumbs/small/'.$file.'" id="'.$id.'" />';
     echo '</a>';
     echo '<br />';
     echo '<input type="checkbox" id="CB_'.$id.'" onchange="selectImage(\''.$id.'\')" /> Add to downloads';
