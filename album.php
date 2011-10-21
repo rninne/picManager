@@ -69,16 +69,10 @@
                 $('DL_'+id).setStyle('border-bottom:none;')
             }
         }
-
-        function asdf(){
-            var filename = $('filename').value;
-            new Ajax.Request('zipDownload.php?folder=<?php echo $folder ?>&files='+imageList.toString(), {
-                method: 'get',
-                onSuccess: function(response) {
-                    $('generate').replace('<a href="zips/'+ filename +'.zip" >Download '+ filename +'.zip</a>');
-                }
-            });
+        function makeZipLink() {
+            window.location='zipDownload.php?folder=<?php echo $folder ?>&files=' + imageList.toString();
         }
+
     </script>
     <link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="css/photobooth.css" type="text/css" media="screen" />
@@ -176,10 +170,7 @@ EOS;
             </div>
         </div>
         <div id="downloads">
-            <div id="asdf">
-                <input id="filename" type="text" />
-                <input id="generate" type="button" value="generate .zip" onclick="asdf()" />
-            </div>
+            <a href="javascript:makeZipLink()">Download .zip</a>
         </div>
     </body>
 </html>

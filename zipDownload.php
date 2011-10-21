@@ -1,26 +1,39 @@
 <?php
+
+$folder = $_GET['folder'];
 $files = preg_split('/,/', $_GET['files']);
+
+// Temporary name for the zip file
+$zipname = tempnam('./zips', 'images_').'.zip';
+// Create zip file containing requested contents
 $zip = new ZipArchive();
-// $filename = "./photobooth/robert.zip";
-$filename = $_GET['filename'];
-echo $filename .'<br />';
-if ($zip->open('./zips/'.$filename.'.zip', ZIPARCHIVE::CREATE)!==TRUE) {
+if ($zip->open($zipname, ZIPARCHIVE::CREATE) !== TRUE ) {
     exit("cannot open <$filename>\n");
 }
-/*
-$zip->addFromString('test1.txt', 'file content goes here');
-$zip->addFromString('test2.txt', 'file content goes here');
-$zip->addFromString('test3.txt', 'file content goes here');
-$zip->addFromString('test4.txt', 'file content goes here');
-*/
-foreach($files as $file){
-    echo './photobooth/'.$file.'.jpg<br />';
-    $zip->addFile('./photobooth/'.$file.'.jpg', $file.'.jpg');
-
+foreach($files as $file) {
+    $zip->addFile("./images/$folder/$file.jpg", "$folder/$file.jpg");
 }
-
-// echo "numfiles: " . $zip->numFiles . "\n";
-// echo "status:" . $zip->status . "\n";
 $zip->close();
+
+// Now construct the response.  This causes the browser to prompt the user to 
+// save the zip file.
+
+header('Content-Description: File Transfer');
+header('Content-Type: application/zip');
+header('Content-Disposition: attachment; filename='.$folder.'.zip');
+header('Content-Transfer-Encoding: binary');
+header('Expires: 0');
+header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+header('Pragma: public');
+header('Content-Length: '.filesize($zipname));
+
+// Make doubly sure we don't send any extra data in the body (?),
+// read in the data, and finally remove the temporary file>
+ob_clean();
+flush();
+readfile($zipname);
+unlink($zipname);
+
+exit;
 
 ?>
