@@ -1,0 +1,60 @@
+body{
+	background: lightgrey;
+}
+#downloads{
+	border: 1px solid;
+	width: 200px;
+	height: 100%;
+	padding: 20px;
+	position: fixed;
+	overflow: scroll;
+	right: 5px;
+	top: 0px;
+	text-align: center;
+	background: white;
+}
+.choice{
+	border: 1px solid black;
+	width: 160px;
+	padding:5px;
+	margin: auto auto 7px auto;
+	border-radius: 5px;
+}
+.row{
+	clear: left;
+	padding-top: 5px;
+}
+.left {
+	float:left;
+	margin: 0px;
+	padding: 5px 0px 5px 5px;
+	border-left: 1px solid black;
+	border-bottom-left-radius: 5px;
+	border-top-left-radius: 5px;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	border-right: 0px;
+	background: white;
+}
+.middle {
+	float:left;
+	margin: 0px;
+	padding: 5px 0px 5px 0px;
+	border-left: 0px;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	border-right: 0px;
+	background: white;
+}
+.right {
+	float:left;
+	margin: 0px 5px 0px 0px;
+	padding: 5px 5px 5px 0px;
+	border-left: 0px;
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	background: white;
+}
