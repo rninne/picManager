@@ -1,76 +1,49 @@
 body{
-
-	background: lightgrey;
-
+    background: lightgrey;
 }
-
-.row div{
-    width: 150px;
-}
-
 #downloads{
-
-	border: 1px solid;
-
-	width: 200px;
-
-	height: 100%;
-
-	padding: 20px;
-
-	position: fixed;
-
-	overflow: scroll;
-
-	right: 5px;
-
-	top: 0px;
-
-	text-align: center;
-
-	background: white;
-
-}
-
-.choice{
-
-	border: 1px solid black;
-
-	width: 160px;
-
-	padding:5px;
-
-	margin: auto auto 7px auto;
-
-	border-radius: 5px;
-
-}
-
-.row{
-
-	clear: left;
-
-	padding-top: 5px;
-
-}
-
-.left, .right, .middle {
-
-    float:left;
-    text-align: center;
-
-    margin: 0px;
-
-    padding: 5px;
-
-    border: 1px solid black;
-
+    border: 1px solid;
     border-radius: 5px;
-
+    width: 15%;
+    height: 100%;
+    padding: 20px;
+    position: fixed;
+    overflow: scroll;
+    right: 5px;
+    top: 0px;
+    text-align: center;
     background: white;
+}
+.choice{
+    border: 1px solid black;
+    width: 160px;
+    padding:5px;
+    margin: auto auto 7px auto;
+    border-radius: 5px;
+}
+#picContainer {
+    width: 80%;
 
 }
-
+.row{
+    clear: left;
+    padding-top: 5px;
+}
+.left, .right, .middle {
+    width: 16%;
+    max-width: 160px;
+    float: left;
+    text-align: center;
+    margin: 0px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: white;
+}
 .row a {
     text-align: center;
+}
+.row img {
+    width: 100%;
+    max-width: 150px;
+    margin: 5px;
 }
