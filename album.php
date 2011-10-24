@@ -83,7 +83,7 @@ $files = scandir($dir);
 
 /*** Scan for thumbnails
 if thumbnail not found in /thumbs directory, create a new one.
-
+*/
 foreach($files as $file){
 
     if(file_exists($dir.'/thumbs/large/'.$file)){
@@ -105,7 +105,7 @@ foreach($files as $file){
         $image->save($dir.'/thumbs/small/'.$file);
     }
 }
-*/
+
 
 /*** remove all non image files from the array
 */

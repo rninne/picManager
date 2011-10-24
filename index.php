@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<canvas id="photobooth_card_1"></canvas>
+<canvas id="IMG_0023"></canvas>
 <canvas id="photobooth_card_2"></canvas>
 <canvas id="photobooth_card_3"></canvas>
 <canvas id="photobooth_card_4"></canvas>
