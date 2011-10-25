@@ -19,6 +19,12 @@ photoCard.prototype = {
         var y = Math.cos(a) * h1;
         return [x, y];
     },
+    calcOffset2: function(a, w, h){
+        var h1 = Math.sin(a) * h;
+        var x = Math.cos(a) * h1;
+        var y = Math.sin(a) * h1;
+        return [x, y];
+    },
     calcCWH: function(a, w, h){
         var h2 = Math.sqrt(w*w + h*h);
         var th = Math.atan(h/w);
@@ -34,16 +40,17 @@ photoCard.prototype = {
         var a = this.toRads(this.rotation);
         var w = photo.width; 
         var h = photo.height;
-        var offset = this.calcOffset(a, w, h);
         var canvasWH = this.calcCWH(a, w, h);
         this.photoCanvas.width = canvasWH[0];
         this.photoCanvas.height = canvasWH[1];
         this.context.rotate(a);
         if(this.rotation < 0){
+            var offset = this.calcOffset(a, w, h);
             offset[0] = offset[0] * -1;
             offset[1] = offset[1] * -1;
         } else {
-            offset[1] = 0;        
+            var offset = this.calcOffset2(a, w, h);
+            offset[1] = offset[1] * -1;
         }
         this.context.drawImage(photo, offset[0], offset[1]);
         //cContext.drawImage(photo, -37, 65);
@@ -55,11 +62,11 @@ photoCard.prototype = {
     
 }
 Event.observe(window, 'load', function(){
-    // asdf = new photoCard('IMG_0023', 'photobooth', -60);
-    // asdf1 = new photoCard('IMG_0026', 'photobooth', -50);
-    // asdf2 = new photoCard('IMG_0028', 'photobooth', -40);
-    // asdf3 = new photoCard('IMG_0031', 'photobooth', -30);
-    // asdf4 = new photoCard('IMG_0036', 'photobooth', -20);
+    asdf = new photoCard('IMG_0023', 'photobooth', -30);
+    asdf1 = new photoCard('IMG_0026', 'photobooth', -15);
+    asdf2 = new photoCard('IMG_0028', 'photobooth', -0);
+    asdf3 = new photoCard('IMG_0031', 'photobooth', 15);
+    asdf4 = new photoCard('IMG_0036', 'photobooth', 30);
     
     });
 //document.observe('dom:loaded', function () { });

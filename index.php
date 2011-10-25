@@ -6,11 +6,11 @@
 </head>
 <body>
 
-<canvas id="IMG_0023"></canvas>
-<canvas id="IMG_0026"></canvas>
-<canvas id="IMG_0028"></canvas>
-<canvas id="IMG_0031"></canvas>
-<canvas id="IMG_0036"></canvas>
+<canvas id="IMG_0023" class="canvas1"></canvas>
+<canvas id="IMG_0026" class="canvas2"></canvas>
+<canvas id="IMG_0028" class="canvas3"></canvas>
+<canvas id="IMG_0031" class="canvas4"></canvas>
+<canvas id="IMG_0036" class="canvas5"></canvas>
 
 <br />
 <br />
@@ -32,10 +32,11 @@ array_shift($folders);
 $i=0;
 foreach($folders as $index => $item){
     if(is_dir($dir.$item)){
+    //<img src="${item}_album.jpg" /><br />
         echo <<<EOS
         <dir class="album">
             <a href="album.php?folder=$item">
-                <img src="${item}_album.jpg" /><br />
+                
                 $item
             </a>
         </dir>

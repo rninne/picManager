@@ -1,12 +1,40 @@
 body{
     background: lightgrey;
 }
-canvas {
-    /*
+.canvas1 {
+    
     position: absolute;
     left: 5px;
     top: 5px;
-    */
+    
+}
+.canvas2 {
+    
+    position: absolute;
+    left: 25px;
+    top: 5px;
+    
+}
+.canvas3 {
+    
+    position: absolute;
+    left: 45px;
+    top: 5px;
+    
+}
+.canvas4 {
+    
+    position: absolute;
+    left: 65px;
+    top: 5px;
+    
+}
+.canvas5 {
+    
+    position: absolute;
+    left: 85px;
+    top: 5px;
+    
 }
 #albums{
     border: 1px solid;
