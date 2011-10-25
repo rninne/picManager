@@ -2,9 +2,11 @@ body{
     background: lightgrey;
 }
 canvas {
+    /*
     position: absolute;
     left: 5px;
     top: 5px;
+    */
 }
 #albums{
     border: 1px solid;

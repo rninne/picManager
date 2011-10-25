@@ -17,7 +17,7 @@
 <p>
             <strong>Rotate Image: </strong>
             <a href="javascript:asdf();" id="resetImage">Reset Image</a>
-            <a href="javascript:;" id="rotate90">90&deg;</a>
+            <a href="javascript:asdf2();" id="rotate90">90&deg;</a>
             <a href="javascript:;" id="rotate180">180&deg;</a>
             <a href="javascript:;" id="rotate270">270&deg;</a>
         </p>
