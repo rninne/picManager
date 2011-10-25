@@ -7,16 +7,16 @@
 <body>
 
 <canvas id="IMG_0023"></canvas>
-<canvas id="photobooth_card_2"></canvas>
-<canvas id="photobooth_card_3"></canvas>
-<canvas id="photobooth_card_4"></canvas>
-<canvas id="photobooth_card_5"></canvas>
+<canvas id="IMG_0026"></canvas>
+<canvas id="IMG_0028"></canvas>
+<canvas id="IMG_0031"></canvas>
+<canvas id="IMG_0036"></canvas>
 
 <br />
 <br />
 <p>
             <strong>Rotate Image: </strong>
-            <a href="javascript:;" id="resetImage">Reset Image</a>
+            <a href="javascript:asdf();" id="resetImage">Reset Image</a>
             <a href="javascript:;" id="rotate90">90&deg;</a>
             <a href="javascript:;" id="rotate180">180&deg;</a>
             <a href="javascript:;" id="rotate270">270&deg;</a>
