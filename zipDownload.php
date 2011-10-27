@@ -1,5 +1,5 @@
 <?php
-
+ini_set('memory_limit','128M');
 $folder = $_GET['folder'];
 $files = preg_split('/,/', $_GET['files']);
 
@@ -12,8 +12,11 @@ if ($zip->open($zipname, ZIPARCHIVE::CREATE) !== TRUE ) {
 }
 foreach($files as $file) {
     $zip->addFile("./images/$folder/$file.jpg", "$folder/$file.jpg");
+    //echo "./images/$folder/$file.jpg";
 }
 $zip->close();
+
+
 
 // Now construct the response.  This causes the browser to prompt the user to 
 // save the zip file.
@@ -32,7 +35,7 @@ header('Content-Length: '.filesize($zipname));
 ob_clean();
 flush();
 readfile($zipname);
-unlink($zipname);
+//unlink($zipname);
 
 exit;
 

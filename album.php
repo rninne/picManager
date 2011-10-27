@@ -1,4 +1,8 @@
 <?php
+/*** Include configuration scripts and image scaler
+*/
+include('php/SimpleImage.php');
+include('php/iniProperties.php');
 /*** Set page defaults based on selection at choice of album page
 */
     if(isset($_GET['folder'])){
@@ -74,8 +78,6 @@
 
 <?php
 
-include('SimpleImage.php');
-
 /*** Scan directory for images
 */
 
@@ -83,7 +85,7 @@ $files = scandir($dir);
 
 /*** Scan for thumbnails
 if thumbnail not found in /thumbs directory, create a new one.
-*/
+
 foreach($files as $file){
 
     if(file_exists($dir.'/thumbs/large/'.$file)){
@@ -105,7 +107,7 @@ foreach($files as $file){
         $image->save($dir.'/thumbs/small/'.$file);
     }
 }
-
+*/
 
 /*** remove all non image files from the array
 */

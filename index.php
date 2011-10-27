@@ -1,3 +1,9 @@
+<?php
+/*** Include configuration scripts and image scaler
+*/
+include('php/SimpleImage.php');
+include('php/iniProperties.php');
+?>
 <html>
 <head>
 <script src="js/prototype.js" type="text/javascript"></script>
