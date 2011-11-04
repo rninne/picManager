@@ -1,16 +1,18 @@
 var photoCard = Class.create();
-
+var imageThumbs = new Array();
 photoCard.prototype = {
-    photoImg: new Image(),
+    photoImg: undefined,
     photoCanvas: undefined,
     context: undefined,
     rotation: undefined,
     initialize: function (photo, album, rotation){
+        this.photoImg = new Image();
         this.rotation = rotation;
         this.photoCanvas = $(photo);
-        this.context = this.photoCanvas.getContext('2d'),
-        this.photoImg.src = 'images/'+ album +'/thumbs/small/'+photo+'.JPG';
-        this.photoImg.onload = this.imageInit(this.photoImg);
+        this.context = this.photoCanvas.getContext('2d');
+        // Event.observe(this.photoImg, 'load', this.imageInit(this.photoImg));
+        // this.photoImg.onload = this.imageInit(this.photoImg);
+        this.photoImg.src = 'images/'+ album +'/thumbs/small/'+photo+'.jpg';
     },
     src: '',
     calcOffset: function(a, w, h){
@@ -59,32 +61,48 @@ photoCard.prototype = {
         this.context.clearRect(0, 0, 0, 0);
     
     },
-    
 }
 Event.observe(window, 'load', function(){
-    asdf = new photoCard('IMG_0023', 'photobooth', -30);
-    asdf1 = new photoCard('IMG_0026', 'photobooth', -15);
-    asdf2 = new photoCard('IMG_0028', 'photobooth', -0);
-    asdf3 = new photoCard('IMG_0031', 'photobooth', 15);
-    asdf4 = new photoCard('IMG_0036', 'photobooth', 30);
-    
-    });
-//document.observe('dom:loaded', function () { });
+    for(j=0; j<imageThumbs.length; j++){
+        if(imageThumbs[j].photoImg.complete){
+            var asdf = imageThumbs[j].photoImg.src;
+            imageThumbs[j].imageInit(imageThumbs[j].photoImg);
+        } else {
+            
+        }
+    }
+});
+document.observe('dom:loaded', function(){
+    var cards = $$('canvas.card');
+    var a = 0;
+    for(i=0; i<cards.length; i++){
+        if(cards[i].hasClassName('r')){
+            a = -30;
+        } else if(cards[i].hasClassName('rm')) {
+            a = -15;
+        } else if(cards[i].hasClassName('m')) {
+            a = 0;
+        } else if(cards[i].hasClassName('ml')) {
+            a = 15;
+        } else if(cards[i].hasClassName('l')) {
+            a = 30;
+        } else {
+        }
+        var asdf = new photoCard(cards[i].id, cards[i].readAttribute('album'), a);
+        imageThumbs.push(asdf);
+    }
+});
+// function asdf(){
+    // asdf = new photoCard('IMG_0023', 'photobooth', -60);
 
-function asdf(){
-    asdf = new photoCard('IMG_0023', 'photobooth', -60);
+// }
+// function asdf2(){
+    // asdf.clearContext();
 
-}
-function asdf2(){
-    asdf.clearContext();
-
-}
-
-
-
+// }
 
 /*
-Event.observe(window, 'load', function(){
+    Event.observe(window, 'load', function(){
     
     //var photo1 = new photoCard('IMG_0023', 'photobooth');
     

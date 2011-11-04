@@ -1,37 +1,40 @@
 body{
     background: lightgrey;
 }
-.canvas1 {
+.album {
+    height: 200px;
+}
+.r {
     
-    position: absolute;
+    position: relative;
     left: 5px;
     top: 5px;
     
 }
-.canvas2 {
+.rm {
     
-    position: absolute;
+    position: relative;
     left: 25px;
     top: 5px;
     
 }
-.canvas3 {
+.m {
     
-    position: absolute;
+    position: relative;
     left: 45px;
     top: 5px;
     
 }
-.canvas4 {
+.ml {
     
-    position: absolute;
+    position: relative;
     left: 65px;
     top: 5px;
     
 }
-.canvas5 {
+.l {
     
-    position: absolute;
+    position: relative;
     left: 85px;
     top: 5px;
     

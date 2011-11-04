@@ -16,6 +16,7 @@ include('php/iniProperties.php');
     //$userFolder = './users/'. $username;
 
     $dir = './images/'.$folder.'/';
+    $files = scandir($dir);
 ?>
 
 <html>
@@ -26,89 +27,47 @@ include('php/iniProperties.php');
     <script type="text/javascript">
         var imagePosition = {};
         var imageList = [];
-
-        function toggleImage(checkBox, id){
-            var checked = $(checkBox).checked;
-            if(checked){
-                $('CB_'+id).checked = 'checked';
-                $('downloads').insert('<div id="DL_'+ id +'" class="choice"><img src="<?php echo $dir ?>thumbs/small/'+ id +'.JPG" onmouseup="removeImage(\''+ id +'\')" /><br />'+id+'</div>');
-                $('A_'+id).title = '<input id="CBL_'+ id +'" class="CBL" type="checkbox" checked="checked" onchange="toggleImage(this,\''+ id +'\')" /> Add to downloads';
-                imageList.push(id);
-            } else {
-                removeImage(id);
-            }
-
-            $('DLZIP').href = 'zipDownload.php?folder=<?php echo $folder ?>&files=' + imageList.toString();
-        }
         
-        function removeImage(id){
-            $('DL_'+id).remove();
-            $('CB_'+id).checked = '';
-            $('A_'+id).title = '<input id="CBL_'+ id +'" class="CBL" type="checkbox" onchange="toggleImage(this,\''+ id +'\')" /> Add to downloads';
-
-            for(i=0;i<imageList.length;i++){
-                if(imageList[i] == id) {
-                    imageList.splice(i, 1);
-                    break;
+        function toggleImage(id){
+            for(i=0; i<imageList.length; i++){
+                if(imageList[i] == id){
+                    //image is already in the download list, remove it
+                    removeImageFromDownloads(id, i);
+                    updateURL();
+                    return;
                 }
             }
-            $('DLZIP').href = 'zipDownload.php?folder=<?php echo $folder ?>&files=' + imageList.toString();
+            //image not found in imageList, add it
+            addImageToDownloads(id);
+            updateURL();
         }
-        
-        function checkPosition(id){
-            alert(listOfImages[id]);
+        function removeImageFromDownloads(id, index){
+            $('DL_'+id).remove();
+            $('A_'+id).title = '<input id="CBL_'+ id +'" class="CBL" type="checkbox" onchange="toggleImage(\''+ id +'\')" /> Add to downloads';
+            imageList.splice(index, 1);
         }
-
-        function hoverImage(id, over){
-            if (over) {
-                $('DL_'+id).setStyle('border-bottom:5px solid blue;')
-            } else {
-                $('DL_'+id).setStyle('border-bottom:none;')
-            }
+        function addImageToDownloads(id){
+            $('downloads').insert('<div id="DL_'+ id +'" class="choice"><img src="<?php echo $dir ?>thumbs/small/'+ id +'.jpg" onmouseup="toggleImage(\''+ id +'\')" /><br />'+id+'</div>');
+            $('A_'+id).title = '<input id="CBL_'+ id +'" class="CBL" type="checkbox" checked="checked" onchange="toggleImage(\''+ id +'\')" /> Add to downloads';
+            imageList.push(id);
+            
         }
-        function makeZipLink() {
-            window.location='zipDownload.php?folder=<?php echo $folder ?>&files=' + imageList.toString();
+        function updateURL(){
+            $('DLZIP').href = 'zipDownload.php?folder=<?php echo $folder ?>&files=' + imageList.toString();        
         }
 
     </script>
     <link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="css/photobooth.css" type="text/css" media="screen" />
+    <?php
+        if($folder == 'photobooth'){
+            echo '<link rel="stylesheet" href="css/photobooth.css" type="text/css" media="screen" />';
+        } else {
+            echo '<link rel="stylesheet" href="css/thumbnails.css" type="text/css" media="screen" />';
+        }
+    ?>
     </head>
     <body>
-
 <?php
-
-/*** Scan directory for images
-*/
-
-$files = scandir($dir);
-
-/*** Scan for thumbnails
-if thumbnail not found in /thumbs directory, create a new one.
-
-foreach($files as $file){
-
-    if(file_exists($dir.'/thumbs/large/'.$file)){
-        echo 'large thumb for '.$file.' exists <br />';
-    } else {
-        $image = new SimpleImage();
-        $image->load($dir.$file);
-        $image->resizeToWidth(800);
-        $image->save($dir.'/thumbs/large/'.$file);
-
-    }
-
-    if(file_exists($dir.'/thumbs/small/'.$file)){
-        echo 'large thumb for '.$file.' exists <br />';
-    } else {
-        $image = new SimpleImage();
-        $image->load($dir.$file);
-        $image->resizeToWidth(150);
-        $image->save($dir.'/thumbs/small/'.$file);
-    }
-}
-*/
-
 /*** remove all non image files from the array
 */
 
@@ -121,16 +80,12 @@ foreach($files as $index => $file){
         $i++;
     }
 }
-
-//print_r($files);
-
 ?>
 
         <div id="picContainer" style="clear:none;">
             <div class="row">
 
 <?php
-
 foreach($files as $index => $file){
 
     list($id, $extension) = preg_split('/\./', $file);
@@ -147,14 +102,13 @@ foreach($files as $index => $file){
     }
 
     echo <<<EOS
-    <a id="A_$id" href="${dir}thumbs/large/$file" rel="lightbox[photobooth]" title="&lt;input id=&quot;CBL_$id&quot; class=&quot;CBL&quot; type=&quot;checkbox&quot; onchange=&quot;toggleImage(this)&quot; /&gt; Add to downloads"><img src="${dir}thumbs/small/$file" id="$id"/></a>
+    <img src="${dir}thumbs/small/$file" id="$id" onclick="toggleImage('$id')"/>
     <br />
-    <input id="CB_$id" class="CB" type="checkbox" onchange="toggleImage(this, '$id')" /> Add to downloads
+    <a id="A_$id" href="${dir}thumbs/large/$file" rel="lightbox[photobooth]" title="&lt;input id=&quot;CBL_$id&quot; class=&quot;CBL&quot; type=&quot;checkbox&quot; onchange=&quot;toggleImage('$id')&quot; /&gt; Add to downloads">Show in slide show</a>
     </div>
 EOS;
 
     if ($index%6 == 5) {
-
         echo <<<EOS
         </div>
         <div class="row">

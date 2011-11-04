@@ -32,10 +32,10 @@ header('Content-Length: '.filesize($zipname));
 
 // Make doubly sure we don't send any extra data in the body (?),
 // read in the data, and finally remove the temporary file>
-ob_clean();
+//ob_clean();
 flush();
 readfile($zipname);
-//unlink($zipname);
+unlink($zipname);
 
 exit;
 
